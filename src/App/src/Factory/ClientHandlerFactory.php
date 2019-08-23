@@ -5,6 +5,7 @@ namespace App\Factory;
 
 
 use App\Handler\ClientHandler;
+use App\Service\ClientService;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Hal\HalResponseFactory;
 use Zend\Expressive\Hal\ResourceGenerator;
@@ -15,7 +16,8 @@ class ClientHandlerFactory
     {
         $resourceGenerator = $container->get(ResourceGenerator::class);
         $halResponseFactory = $container->get(HalResponseFactory::class);
+        $clientService = $container->get(ClientService::class);
 
-        return new ClientHandler($resourceGenerator, $halResponseFactory);
+        return new ClientHandler($resourceGenerator, $halResponseFactory, $clientService);
     }
 }

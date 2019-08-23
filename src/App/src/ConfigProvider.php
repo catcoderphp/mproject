@@ -4,10 +4,18 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Dao\ClientDao;
+use App\Dao\RangeDao;
+use App\Factory\ClientDaoFactory;
 use App\Factory\ClientHandlerFactory;
+use App\Factory\ClientServiceFactory;
 use App\Factory\DataProviderHandlerFactory;
+use App\Factory\EMTransactionsFactory;
+use App\Factory\RangeDaoFactory;
 use App\Handler\ClientHandler;
 use App\Handler\DataProviderHandler;
+use App\Service\ClientService;
+use App\Utils\EMTransactions;
 use Zend\Expressive\Application;
 
 /**
@@ -41,8 +49,16 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories' => [
+                //dao invokable
+                ClientDao::class => ClientDaoFactory::class,
+                RangeDao::class => RangeDaoFactory::class,
+                //service invokable
+                ClientService::class => ClientServiceFactory::class,
+                // handler invokable
                 DataProviderHandler::class => DataProviderHandlerFactory::class,
-                ClientHandler::class => ClientHandlerFactory::class
+                ClientHandler::class => ClientHandlerFactory::class,
+                //utils invokable
+                EMTransactions::class => EMTransactionsFactory::class
             ],
             'delegators' => [
                 Application::class => [

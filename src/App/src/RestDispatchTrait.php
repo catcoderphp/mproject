@@ -89,4 +89,9 @@ trait RestDispatchTrait
             throw OutOfBoundsException::create($exception);
         }
     }
+
+    private function createResponseByObjectMapped($object,$headers = [],$statusCode = 200)
+    {
+
+    }
 }
