@@ -31,7 +31,7 @@ trait RestDispatchTrait
      *
      * @throws Exception\MethodNotAllowedException if no matching method is found.
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $method = strtolower($request->getMethod());
         if (method_exists($this, $method)) {
@@ -70,7 +70,7 @@ trait RestDispatchTrait
      * @throws \App\Exception\OutOfBoundsException if an `OutOfBoundsException` is
      *     thrown by the response factory and/or resource generator.
      */
-    private function createResponseByArray(ServerRequestInterface $request, $data) : ResponseInterface
+    private function createResponseByArray(ServerRequestInterface $request, $data): ResponseInterface
     {
         try {
             $resource = $this->resourceGenerator->fromArray($data);
@@ -80,7 +80,7 @@ trait RestDispatchTrait
         }
     }
 
-    private function createResponseByJsonObject($data, $headers = [], $statusCode = 200) : JsonResponse
+    private function createResponseByJsonObject($data, $headers = [], $statusCode = 200): JsonResponse
     {
         try {
             $jsonObject = new JsonResponse($data, $statusCode, $headers);

@@ -16,6 +16,6 @@ class ClientHandlerFactory
         $resourceGenerator = $container->get(ResourceGenerator::class);
         $halResponseFactory = $container->get(HalResponseFactory::class);
 
-        return new ClientHandler($resourceGenerator,$halResponseFactory);
+        return new ClientHandler($resourceGenerator, $halResponseFactory);
     }
 }

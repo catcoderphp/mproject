@@ -9,12 +9,10 @@
 namespace App;
 
 
-
 use App\Handler\ClientHandler;
 use App\Handler\DataProviderHandler;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
-use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 
 class RoutesDelegator
 {
@@ -33,7 +31,7 @@ class RoutesDelegator
             [DataProviderHandler::class], ["GET"]
         );
 
-        $app->route("/clients",[ClientHandler::class],["GET"]);
+        $app->route("/clients", [ClientHandler::class], ["GET"]);
 
         return $app;
     }

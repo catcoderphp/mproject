@@ -17,14 +17,6 @@ class HomePageHandlerFactoryTest extends TestCase
     /** @var ContainerInterface|ObjectProphecy */
     protected $container;
 
-    protected function setUp()
-    {
-        $this->container = $this->prophesize(ContainerInterface::class);
-        $router = $this->prophesize(RouterInterface::class);
-
-        $this->container->get(RouterInterface::class)->willReturn($router);
-    }
-
     public function testFactoryWithoutTemplate()
     {
         $factory = new HomePageHandlerFactory();
@@ -49,5 +41,13 @@ class HomePageHandlerFactoryTest extends TestCase
         $homePage = $factory($this->container->reveal());
 
         $this->assertInstanceOf(HomePageHandler::class, $homePage);
+    }
+
+    protected function setUp()
+    {
+        $this->container = $this->prophesize(ContainerInterface::class);
+        $router = $this->prophesize(RouterInterface::class);
+
+        $this->container->get(RouterInterface::class)->willReturn($router);
     }
 }

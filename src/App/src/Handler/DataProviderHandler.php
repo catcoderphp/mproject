@@ -45,9 +45,9 @@ class DataProviderHandler implements RequestHandlerInterface
     }
 
 
-    public function get(ServerRequestInterface $request) : ResponseInterface
+    public function get(ServerRequestInterface $request): ResponseInterface
     {
         $em = $this->entityManager->getRepository(FooEntity::class);;
-        return $this->createResponseByJsonObject($em->findAll(), [],Response::STATUS_CODE_200);
+        return $this->createResponseByJsonObject($em->findAll(), [], Response::STATUS_CODE_200);
     }
 }

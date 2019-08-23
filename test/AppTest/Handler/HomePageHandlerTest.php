@@ -23,12 +23,6 @@ class HomePageHandlerTest extends TestCase
     /** @var RouterInterface|ObjectProphecy */
     protected $router;
 
-    protected function setUp()
-    {
-        $this->container = $this->prophesize(ContainerInterface::class);
-        $this->router    = $this->prophesize(RouterInterface::class);
-    }
-
     public function testReturnsJsonResponseWhenNoTemplateRendererProvided()
     {
         $homePage = new HomePageHandler(
@@ -61,5 +55,11 @@ class HomePageHandlerTest extends TestCase
         );
 
         $this->assertInstanceOf(HtmlResponse::class, $response);
+    }
+
+    protected function setUp()
+    {
+        $this->container = $this->prophesize(ContainerInterface::class);
+        $this->router = $this->prophesize(RouterInterface::class);
     }
 }

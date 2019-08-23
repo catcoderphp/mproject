@@ -12,13 +12,13 @@ use Zend\Expressive\Hal\ResourceGenerator;
 
 class DataProviderHandlerFactory
 {
-    public function __invoke(ContainerInterface $container) : DataProviderHandler
+    public function __invoke(ContainerInterface $container): DataProviderHandler
     {
 
-            $entityManager = $container->get(EntityManager::class);
+        $entityManager = $container->get(EntityManager::class);
 
         $resourceGenerator = $container->get(ResourceGenerator::class);
         $responseFactory = $container->get(HalResponseFactory::class);
-        return new DataProviderHandler($entityManager,$resourceGenerator,$responseFactory);
+        return new DataProviderHandler($entityManager, $resourceGenerator, $responseFactory);
     }
 }

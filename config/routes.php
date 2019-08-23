@@ -32,6 +32,6 @@ use Zend\Expressive\MiddlewareFactory;
  *     'contact'
  * );
  */
-return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
+return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
 
 };

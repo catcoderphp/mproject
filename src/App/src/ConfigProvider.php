@@ -24,23 +24,23 @@ class ConfigProvider
      * method which returns an array with its configuration.
      *
      */
-    public function __invoke() : array
+    public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'templates'    => $this->getTemplates(),
+            'templates' => $this->getTemplates(),
         ];
     }
 
     /**
      * Returns the container dependencies
      */
-    public function getDependencies() : array
+    public function getDependencies(): array
     {
         return [
             'invokables' => [
             ],
-            'factories'  => [
+            'factories' => [
                 DataProviderHandler::class => DataProviderHandlerFactory::class,
                 ClientHandler::class => ClientHandlerFactory::class
             ],
@@ -56,12 +56,12 @@ class ConfigProvider
     /**
      * Returns the templates configuration
      */
-    public function getTemplates() : array
+    public function getTemplates(): array
     {
         return [
             'paths' => [
-                'app'    => [__DIR__ . '/../templates/app'],
-                'error'  => [__DIR__ . '/../templates/error'],
+                'app' => [__DIR__ . '/../templates/app'],
+                'error' => [__DIR__ . '/../templates/error'],
                 'layout' => [__DIR__ . '/../templates/layout'],
             ],
         ];
