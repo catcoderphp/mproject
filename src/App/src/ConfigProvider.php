@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Factory\ClientHandlerFactory;
 use App\Factory\DataProviderHandlerFactory;
+use App\Handler\ClientHandler;
 use App\Handler\DataProviderHandler;
 use Zend\Expressive\Application;
 
@@ -39,7 +41,8 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories'  => [
-                DataProviderHandler::class => DataProviderHandlerFactory::class
+                DataProviderHandler::class => DataProviderHandlerFactory::class,
+                ClientHandler::class => ClientHandlerFactory::class
             ],
             'delegators' => [
                 Application::class => [
