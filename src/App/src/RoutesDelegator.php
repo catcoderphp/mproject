@@ -10,6 +10,7 @@ namespace App;
 
 
 use App\Handler\ClientHandler;
+use App\Handler\CollaboratorHandler;
 use App\Handler\DataProviderHandler;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
@@ -37,6 +38,15 @@ class RoutesDelegator
             ImplicitOptionsMiddleware::class,
             BodyParamsMiddleware::class,
             ClientHandler::class
+        ], [
+            "GET",
+            "POST"
+        ]);
+
+        $app->route("/collaborators", [
+            ImplicitOptionsMiddleware::class,
+            BodyParamsMiddleware::class,
+            CollaboratorHandler::class
         ], [
             "GET",
             "POST"

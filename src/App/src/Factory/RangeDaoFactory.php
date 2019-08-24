@@ -15,6 +15,6 @@ class RangeDaoFactory
     {
         $em = $container->get(EntityManager::class);
         $emTransactions = $container->get(EMTransactions::class);
-        return new RangeDao($em,$emTransactions);
+        return new RangeDao($em, $emTransactions);
     }
 }

@@ -33,7 +33,7 @@ class RangeDao
         $this->repository = $this->em->getRepository(RangeEntity::class);
     }
 
-    public function getById($id) : RangeEntity
+    public function getById($id): RangeEntity
     {
         return $this->repository->find($id);
     }

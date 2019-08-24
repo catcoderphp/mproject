@@ -90,7 +90,7 @@ trait RestDispatchTrait
         }
     }
 
-    private function createResponseByObjectMapped($object,$headers = [],$statusCode = 200)
+    private function createResponseByObjectMapped($object, $headers = [], $statusCode = 200)
     {
 
     }

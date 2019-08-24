@@ -5,19 +5,17 @@ namespace App\Utils;
 
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping\Entity;
 
 class EMTransactions
 {
-    public function persist(EntityManager $entityManager,$object)
+    public function persist(EntityManager $entityManager, $object)
     {
         $entityManager->getConnection()->beginTransaction();
-        try{
+        try {
             $entityManager->persist($object);
             $entityManager->flush();
             $entityManager->getConnection()->commit();
-        }catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             error_log("entra aca");
             $entityManager->getConnection()->rollBack();
             throw $exception;

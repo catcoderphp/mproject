@@ -5,7 +5,6 @@ namespace App\Model;
 
 
 use App\Entity\ClientEntity;
-use phpDocumentor\Reflection\Types\This;
 
 class Client
 {
@@ -135,7 +134,7 @@ class Client
         $this->active = $active;
     }
 
-    public function mapObject(ClientEntity $clientEntity) : ?Client
+    public function mapObject(ClientEntity $clientEntity): ?Client
     {
         $client = new Client();
         $rangeData = [

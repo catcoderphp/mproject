@@ -43,18 +43,18 @@ class ClientDao
         $this->rangeDao = $rangeDao;
     }
 
-    public function getById($id) : ?ClientEntity
+    public function getById($id): ?ClientEntity
     {
         return $this->repository->find($id);
     }
 
-    public function save(ClientEntity $clientEntity) : ?ClientEntity
+    public function save(ClientEntity $clientEntity): ?ClientEntity
     {
         $range = $this->rangeDao->getById($clientEntity->getRange());
 
         if ($range instanceof RangeEntity) {
             $clientEntity->setRange($range);
-            $this->emTransactions->persist($this->em,$clientEntity);
+            $this->emTransactions->persist($this->em, $clientEntity);
             return $clientEntity;
         }
         return null;

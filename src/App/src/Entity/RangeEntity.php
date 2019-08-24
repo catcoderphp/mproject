@@ -35,6 +35,11 @@ class RangeEntity
     private $clients;
 
     /**
+     * @ORM\OneToOne(targetEntity="MembershipEntity",mappedBy="range")
+     */
+    private $membership;
+
+    /**
      * @return mixed
      */
     public function getId()

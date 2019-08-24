@@ -100,13 +100,13 @@ class ResponseHandler
         $this->setData([]);
         $this->setError(true);
         $this->setMessage("Not Found");
-        $this->buildMeta(0,0,0);
+        $this->buildMeta(0, 0, 0);
         return $this;
     }
 
-    public function buildMeta($totalItems,$currentPage,$totalPages)
+    public function buildMeta($totalItems, $currentPage, $totalPages)
     {
-        $this->setMeta( [
+        $this->setMeta([
             "total_items" => $totalItems,
             "current_page" => $currentPage,
             "total_pages" => $totalPages

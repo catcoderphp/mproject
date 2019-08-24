@@ -81,12 +81,8 @@ DROP TABLE IF EXISTS `collaborators_memberships`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `collaborators_memberships` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `collaborator_id` int(11) DEFAULT NULL,
   `membership_id` int(11) DEFAULT NULL,
-  `active` tinyint(1) DEFAULT NULL,
-  `ttl` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
   KEY `collaborators_collaborators_memberships` (`collaborator_id`),
   KEY `memberships_collaboratos_memberships` (`membership_id`),
   CONSTRAINT `memberships_collaboratos_memberships` FOREIGN KEY (`membership_id`) REFERENCES `memberships` (`id`),
@@ -177,7 +173,7 @@ CREATE TABLE `migration` (
 
 LOCK TABLES `migration` WRITE;
 /*!40000 ALTER TABLE `migration` DISABLE KEYS */;
-INSERT INTO `migration` VALUES ('m000000_000000_base',1566514934),('m190820_213544_db_system',1566514938);
+INSERT INTO `migration` VALUES ('m000000_000000_base',1566600713),('m190820_213544_db_system',1566600717);
 /*!40000 ALTER TABLE `migration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,6 +263,36 @@ INSERT INTO `status_cat` VALUES (1,'Visita'),(2,'Venta'),(3,'Escritura'),(4,'Pag
 UNLOCK TABLES;
 
 --
+-- Table structure for table `suscriptions`
+--
+
+DROP TABLE IF EXISTS `suscriptions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `suscriptions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `collaborator_id` int(11) DEFAULT NULL,
+  `membership_id` int(11) DEFAULT NULL,
+  `ttl` int(11) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `suscriptions_collaborators` (`collaborator_id`),
+  KEY `suscriptions_memberships` (`membership_id`),
+  CONSTRAINT `suscriptions_memberships` FOREIGN KEY (`membership_id`) REFERENCES `memberships` (`id`),
+  CONSTRAINT `suscriptions_collaborators` FOREIGN KEY (`collaborator_id`) REFERENCES `collaborators` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `suscriptions`
+--
+
+LOCK TABLES `suscriptions` WRITE;
+/*!40000 ALTER TABLE `suscriptions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `suscriptions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -328,4 +354,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-22 23:02:41
+-- Dump completed on 2019-08-23 22:52:08
