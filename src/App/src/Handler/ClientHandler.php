@@ -55,7 +55,8 @@ class ClientHandler implements RequestHandlerInterface
         $request = $serverRequest->getParsedBody();
         $headers = [];
         $response = $this->clientService->save($request);
-        var_dump($response);die;
+        var_dump($response);
+        die;
         return $this->createResponseByJsonObject($response, $headers, $response->getStatusCode());
     }
 }

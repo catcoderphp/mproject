@@ -7,20 +7,18 @@ namespace App\Validators;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
-use Zend\Validator\Db\RecordExists;
 use Zend\Validator\EmailAddress;
 use Zend\Validator\NotEmpty;
 use Zend\Validator\StringLength;
 
 class CollaboratorValidator
 {
+    public $messages;
     private $name;
     private $lastname;
     private $email;
     private $password;
     private $phone;
-    public $messages;
-
     /**
      * @var InputFilter
      */

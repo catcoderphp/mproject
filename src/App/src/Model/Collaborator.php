@@ -136,6 +136,6 @@ class Collaborator
     public function toArray()
     {
         $tmp = json_encode($this);
-        return json_decode($tmp,true);
+        return json_decode($tmp, true);
     }
 }

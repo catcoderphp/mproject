@@ -93,16 +93,16 @@ class CollaboratorHandler implements RequestHandlerInterface
             $responseHandler->setStatusCode(Response::STATUS_CODE_200);
             $responseHandler->setMessage("Collaborator Created");
             $responseHandler->setError(false);
-            $responseHandler->buildMeta(1,1,1);
+            $responseHandler->buildMeta(1, 1, 1);
 
         } else {
             $responseHandler->setError(true);
             $responseHandler->setData($collaboratorValidator->messages);
             $responseHandler->setStatusCode(Response::STATUS_CODE_400);
             $responseHandler->setMessage("Bad request");
-            $responseHandler->buildMeta(1,1,1);
+            $responseHandler->buildMeta(1, 1, 1);
         }
 
-        return $this->createResponseByJsonObject($responseHandler,[],$responseHandler->getStatusCode());
+        return $this->createResponseByJsonObject($responseHandler, [], $responseHandler->getStatusCode());
     }
 }
