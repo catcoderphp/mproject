@@ -7,6 +7,7 @@ namespace App\Service;
 use App\Dao\CollaboratorDao;
 use App\Entity\CollaboratorEntity;
 use App\Entity\MembershipEntity;
+use App\Model\Collaborator;
 use App\Model\ResponseHandler;
 use Zend\Http\Response;
 
@@ -23,23 +24,18 @@ class CollaboratorService
 
     public function getById($id)
     {
-        $collaborator = $this->collaboratorDao->getById($id);
-        if ($collaborator instanceof CollaboratorEntity) {
+        $collaboratorEntity = $this->collaboratorDao->getById($id);
+        if ($collaboratorEntity instanceof CollaboratorEntity) {
             $membershipResponse = [];
-            foreach ($collaborator->getMemberships() as $membership) {
+            foreach ($collaboratorEntity->getMemberships() as $membership) {
                 $membershipResponse[] = [
                     "id" => $membership->getId(),
                     "name" => $membership->getName(),
                 ];
             }
-            $collaboratorResponse = [
-                "id" => $collaborator->getId(),
-                "memberships" => $membershipResponse,
-                "email" => $collaborator->getEmail(),
-                "name" => $collaborator->getName(),
-                "lastname" => $collaborator->getLastname(),
-                "phone" => $collaborator->getPhone()
-            ];
+            $collaborator = new Collaborator();
+            $collaboratorResponse = $collaborator->map($collaboratorEntity);
+            $collaboratorResponse->setMemberships($membershipResponse);
 
             $this->response->setError(false);
             $this->response->setMessage("Collaborator found");

@@ -13,6 +13,23 @@ class Collaborator
     public $lastname;
     public $email;
     public $phone;
+    public $memberships;
+
+    /**
+     * @return mixed
+     */
+    public function getMemberships()
+    {
+        return $this->memberships;
+    }
+
+    /**
+     * @param mixed $memberships
+     */
+    public function setMemberships($memberships): void
+    {
+        $this->memberships = $memberships;
+    }
 
     /**
      * @return mixed
@@ -103,5 +120,11 @@ class Collaborator
         $this->setEmail($collaboratorEntity->getEmail());
         $this->setPhone($collaboratorEntity->getPhone());
         return $this;
+    }
+
+    public function toArray()
+    {
+        $tmp = json_encode($this);
+        return json_decode($tmp,true);
     }
 }
