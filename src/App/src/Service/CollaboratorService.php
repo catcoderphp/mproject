@@ -26,7 +26,6 @@ class CollaboratorService
     {
         $collaboratorEntity = $this->collaboratorDao->getById($id);
         if ($collaboratorEntity instanceof CollaboratorEntity) {
-            $membershipResponse = [];
             $collaborator = new Collaborator();
             $collaboratorResponse = $collaborator->map($collaboratorEntity);
 
