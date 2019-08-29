@@ -5,12 +5,14 @@ namespace App\Handler;
 
 
 use App\Dao\MembershipDao;
+use App\Model\ResponseHandler;
 use App\RestDispatchTrait;
 use App\Service\CollaboratorService;
-use Doctrine\Common\Collections\ArrayCollection;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Expressive\Hal\HalResponseFactory;
 use Zend\Expressive\Hal\ResourceGenerator;
+use Zend\Http\Response;
 
 class CollaboratorHandler implements RequestHandlerInterface
 {
@@ -40,34 +42,24 @@ class CollaboratorHandler implements RequestHandlerInterface
         $this->membershipDao = $membershipDao;
     }
 
-    public final function get()
+    public final function get(ServerRequestInterface $request)
     {
-        $collaborator = $this->collaboratorService->getById(1);
+        $params = $request->getQueryParams();
 
-        $membership = $this->membershipDao->getById(4);
-
-
-        if ($collaborator->getMemberships()->count()) {
-            $collaborator->getMemberships()->add($membership);
+        if ((!isset($params["collaborator_id"])) && (!isset($params["membership_id"]))) {
+            $response = new ResponseHandler();
+            $response->setStatusCode(Response::STATUS_CODE_400);
+            $response->setData([
+                "collaborator_id" => null,
+                "membership_id" => null
+            ]);
+            $response->setMessage("Parameters is missing");
+            $response->setError(true);
+            $response->buildMeta(0, 0, 0);
+            return $this->createResponseByJsonObject($response, [], $response->getStatusCode());
         } else {
-            $persistenceObject = new ArrayCollection();
-            $persistenceObject->add($membership);
-            $collaborator->setMemberships($persistenceObject);
+            $response = $this->collaboratorService->getById($params["collaborator_id"]);
         }
-
-        $this->collaboratorService->save($collaborator);
-        $membershipResponse = [];
-        foreach ($collaborator->getMemberships() as $membership) {
-            $membershipResponse[] = [
-                "id" => $membership->getId(),
-                "name" => $membership->getName(),
-            ];
-        }
-        $collaboratorResponse = [
-            "id" => $collaborator->getId(),
-            "memberships" => $membershipResponse,
-            "email" => $collaborator->getEmail()
-        ];
-        return $this->createResponseByJsonObject($collaboratorResponse, [], 200);
+        return $this->createResponseByJsonObject($response, [], $response->getStatusCode());
     }
 }
