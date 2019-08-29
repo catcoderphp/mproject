@@ -114,11 +114,22 @@ class Collaborator
 
     public function map(CollaboratorEntity $collaboratorEntity)
     {
+        $membershipResponse = [];
         $this->setId($collaboratorEntity->getId());
         $this->setName($collaboratorEntity->getName());
         $this->setLastname($collaboratorEntity->getLastname());
         $this->setEmail($collaboratorEntity->getEmail());
         $this->setPhone($collaboratorEntity->getPhone());
+        $memberships = $collaboratorEntity->getMemberships();
+        if (!is_null($memberships)) {
+            foreach ($memberships as $membership) {
+                $membershipResponse[] = [
+                    "id" => $membership->getId(),
+                    "name" => $membership->getName(),
+                ];
+            }
+        }
+        $this->setMemberships($membershipResponse);
         return $this;
     }
 

@@ -27,15 +27,8 @@ class CollaboratorService
         $collaboratorEntity = $this->collaboratorDao->getById($id);
         if ($collaboratorEntity instanceof CollaboratorEntity) {
             $membershipResponse = [];
-            foreach ($collaboratorEntity->getMemberships() as $membership) {
-                $membershipResponse[] = [
-                    "id" => $membership->getId(),
-                    "name" => $membership->getName(),
-                ];
-            }
             $collaborator = new Collaborator();
             $collaboratorResponse = $collaborator->map($collaboratorEntity);
-            $collaboratorResponse->setMemberships($membershipResponse);
 
             $this->response->setError(false);
             $this->response->setMessage("Collaborator found");
