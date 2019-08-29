@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use JsonSerializable;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="foo")
  */
-class FooEntity implements \JsonSerializable
+class FooEntity implements JsonSerializable
 {
     /**
      * @ORM\Id

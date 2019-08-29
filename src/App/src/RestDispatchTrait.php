@@ -67,7 +67,7 @@ trait RestDispatchTrait
      * Create a HAL response from the given $array, based on the incoming $request.
      *
      * @param array $data
-     * @throws \App\Exception\OutOfBoundsException if an `OutOfBoundsException` is
+     * @throws Exception\OutOfBoundsException if an `OutOfBoundsException` is
      *     thrown by the response factory and/or resource generator.
      */
     private function createResponseByArray(ServerRequestInterface $request, $data): ResponseInterface

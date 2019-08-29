@@ -5,6 +5,7 @@ namespace App\Utils;
 
 
 use Doctrine\ORM\EntityManager;
+use Exception;
 
 class EMTransactions
 {
@@ -15,7 +16,7 @@ class EMTransactions
             $entityManager->persist($object);
             $entityManager->flush();
             $entityManager->getConnection()->commit();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             error_log("entra aca");
             $entityManager->getConnection()->rollBack();
             throw $exception;
