@@ -52,11 +52,8 @@ class ClientHandler implements RequestHandlerInterface
 
     public function post(ServerRequestInterface $serverRequest): JsonResponse
     {
-        $request = $serverRequest->getParsedBody();
         $headers = [];
-        $response = $this->clientService->save($request);
-        var_dump($response);
-        die;
+        $response = $this->clientService->save($serverRequest);
         return $this->createResponseByJsonObject($response, $headers, $response->getStatusCode());
     }
 }
