@@ -10,15 +10,16 @@ use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Hal\HalResponseFactory;
 use Zend\Expressive\Hal\ResourceGenerator;
+use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Class UserRootHandler
  * @package App\Handler
  */
-class UserRootHandler
+class UserRootHandler implements RequestHandlerInterface
 {
     use RestDispatchTrait;
-
+    
     /**
      * @var ResourceGenerator
      */
@@ -52,9 +53,14 @@ class UserRootHandler
      * @param ServerRequestInterface $request
      * @return JsonResponse
      */
-    public function post(ServerRequestInterface $request) : JsonResponse
+    public final function post(ServerRequestInterface $request) : JsonResponse
     {
 
         return $this->createResponseByJsonObject([],[],200);
+    }
+
+    public final function get(ServerRequestInterface $request) : JsonResponse
+    {
+        return $this->createResponseByJsonObject(["ping" => time()],[],200);
     }
 }

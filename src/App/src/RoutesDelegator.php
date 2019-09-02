@@ -12,6 +12,7 @@ namespace App;
 use App\Handler\ClientHandler;
 use App\Handler\CollaboratorHandler;
 use App\Handler\DataProviderHandler;
+use App\Handler\UserRootHandler;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
 use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
@@ -51,6 +52,12 @@ class RoutesDelegator
             "GET",
             "POST"
         ]);
+
+        $app->route("/user",[
+            ImplicitOptionsMiddleware::class,
+            BodyParamsMiddleware::class,
+            UserRootHandler::class
+        ],["GET","POST"]);
 
         return $app;
     }
