@@ -5,12 +5,9 @@ namespace App\Handler;
 
 
 use App\Dao\MembershipDao;
-use App\Entity\CollaboratorEntity;
-use App\Model\Collaborator;
 use App\Model\ResponseHandler;
 use App\RestDispatchTrait;
 use App\Service\CollaboratorService;
-use App\Validators\CollaboratorValidator;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Expressive\Hal\HalResponseFactory;
@@ -72,37 +69,7 @@ class CollaboratorHandler implements RequestHandlerInterface
      */
     public final function post(ServerRequestInterface $request)
     {
-        $collaboratorValidator = new CollaboratorValidator();
-        $validation = $collaboratorValidator->validate($request);
-        $responseHandler = new ResponseHandler();
-
-        if ($validation) {
-            $parsedPost = $request->getParsedBody();
-            $uniquePassword = md5(trim($parsedPost["password"]) . trim($parsedPost["email"]));
-            $collaboratorEntity = new CollaboratorEntity();
-            $collaboratorEntity->setEmail($parsedPost["email"]);
-            $collaboratorEntity->setName($parsedPost["name"]);
-            $collaboratorEntity->setLastname($parsedPost["lastname"]);
-            $collaboratorEntity->setEmail(trim($parsedPost["email"]));
-            $collaboratorEntity->setPassword($uniquePassword);
-            $collaboratorEntity->setPhone($parsedPost["phone"]);
-
-            $this->collaboratorService->save($collaboratorEntity);
-            $collaborator = new Collaborator();
-            $responseHandler->setData($collaborator->map($collaboratorEntity));
-            $responseHandler->setStatusCode(Response::STATUS_CODE_200);
-            $responseHandler->setMessage("Collaborator Created");
-            $responseHandler->setError(false);
-            $responseHandler->buildMeta(1, 1, 1);
-
-        } else {
-            $responseHandler->setError(true);
-            $responseHandler->setData($collaboratorValidator->messages);
-            $responseHandler->setStatusCode(Response::STATUS_CODE_400);
-            $responseHandler->setMessage("Bad request");
-            $responseHandler->buildMeta(1, 1, 1);
-        }
-
+        $responseHandler = $this->collaboratorService->save($request);
         return $this->createResponseByJsonObject($responseHandler, [], $responseHandler->getStatusCode());
     }
 }
