@@ -19,7 +19,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class UserRootHandler implements RequestHandlerInterface
 {
     use RestDispatchTrait;
-    
+
     /**
      * @var ResourceGenerator
      */
@@ -55,12 +55,13 @@ class UserRootHandler implements RequestHandlerInterface
      */
     public final function post(ServerRequestInterface $request) : JsonResponse
     {
-
-        return $this->createResponseByJsonObject([],[],200);
+        $response = $this->userRootService->login($request);
+        return $this->createResponseByJsonObject($response,[],$response->getStatusCode());
     }
 
     public final function get(ServerRequestInterface $request) : JsonResponse
     {
+        var_dump(md5("mariomejia@mail.com"."123456789"));die;
         return $this->createResponseByJsonObject(["ping" => time()],[],200);
     }
 }
