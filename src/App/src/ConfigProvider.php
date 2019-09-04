@@ -14,6 +14,7 @@ use App\Factory\ClientHandlerFactory;
 use App\Factory\ClientServiceFactory;
 use App\Factory\CollaboratorDaoFactory;
 use App\Factory\CollaboratorHandlerFactory;
+use App\Factory\CollaboratorLoginFactory;
 use App\Factory\CollaboratorServiceFactory;
 use App\Factory\DataProviderHandlerFactory;
 use App\Factory\EMTransactionsFactory;
@@ -24,6 +25,7 @@ use App\Factory\UserRootHandlerFactory;
 use App\Factory\UserRootServiceFactory;
 use App\Handler\ClientHandler;
 use App\Handler\CollaboratorHandler;
+use App\Handler\CollaboratorLoginHandler;
 use App\Handler\DataProviderHandler;
 use App\Handler\UserRootHandler;
 use App\Service\ClientService;
@@ -78,6 +80,7 @@ class ConfigProvider
                 ClientHandler::class => ClientHandlerFactory::class,
                 CollaboratorHandler::class => CollaboratorHandlerFactory::class,
                 UserRootHandler::class => UserRootHandlerFactory::class,
+                CollaboratorLoginHandler::class => CollaboratorLoginFactory::class,
                 //utils invokable
                 EMTransactions::class => EMTransactionsFactory::class
             ],

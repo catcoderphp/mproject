@@ -11,6 +11,7 @@ namespace App;
 
 use App\Handler\ClientHandler;
 use App\Handler\CollaboratorHandler;
+use App\Handler\CollaboratorLoginHandler;
 use App\Handler\DataProviderHandler;
 use App\Handler\UserRootHandler;
 use Psr\Container\ContainerInterface;
@@ -57,6 +58,12 @@ class RoutesDelegator
             ImplicitOptionsMiddleware::class,
             BodyParamsMiddleware::class,
             UserRootHandler::class
+        ], ["POST"]);
+
+        $app->route("/collaborator-login", [
+            ImplicitOptionsMiddleware::class,
+            BodyParamsMiddleware::class,
+            CollaboratorLoginHandler::class
         ], ["POST"]);
 
         return $app;

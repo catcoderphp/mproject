@@ -54,6 +54,26 @@ class CollaboratorEntity
      * )
      */
     private $memberships;
+    /**
+     * @ORM\OneToOne(targetEntity="CollaboratorSessionEntity",mappedBy="collaborator")
+     */
+    private $session;
+
+    /**
+     * @return mixed
+     */
+    public function getSession()
+    {
+        return $this->session;
+    }
+
+    /**
+     * @param mixed $session
+     */
+    public function setSession($session): void
+    {
+        $this->session = $session;
+    }
 
     /**
      * @return mixed

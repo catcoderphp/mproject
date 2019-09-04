@@ -6,9 +6,11 @@ namespace App\Service;
 
 use App\Dao\CollaboratorDao;
 use App\Entity\CollaboratorEntity;
+use App\Entity\CollaboratorSessionEntity;
 use App\Entity\MembershipEntity;
 use App\Model\Collaborator;
 use App\Model\ResponseHandler;
+use App\Validators\CollaboratorLoginValidator;
 use App\Validators\CollaboratorValidator;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Http\Response;
@@ -76,6 +78,50 @@ class CollaboratorService
             $responseHandler->buildMeta(1, 1, 1);
         }
 
+        return $responseHandler;
+    }
+
+    public function login(ServerRequestInterface $request): ResponseHandler
+    {
+        $collaboratorLoginValidator = new CollaboratorLoginValidator();
+        $validate = $collaboratorLoginValidator->validate($request);
+        $responseHandler = new ResponseHandler();
+        if ($validate) {
+            $data = $request->getParsedBody();
+            $email = $data["email"];
+            $passwd = $data["password"];
+
+
+            $login = $this->collaboratorDao->login($email, $passwd);
+            if ($login instanceof CollaboratorEntity) {
+                $session = $this->collaboratorDao->createSession($login);
+                if ($session instanceof CollaboratorSessionEntity) {
+                    $responseHandler->setMessage("Login successful");
+                    $responseHandler->setError(false);
+                    $responseHandler->buildMeta(1, 1, 1);
+                    $responseHandler->setStatusCode(Response::STATUS_CODE_200);
+                    $loginData = [
+                        "token" => $session->getToken(),
+                        "ttl" => $session->getTtl(),
+                        "email" => $login->getEmail(),
+                        "name" => $login->getName()
+                    ];
+                    $responseHandler->setData($loginData);
+                }
+            } else {
+                $responseHandler->setMessage("User/password are invalid");
+                $responseHandler->setError(true);
+                $responseHandler->setStatusCode(Response::STATUS_CODE_401);
+                $responseHandler->setData($request->getParsedBody());
+                $responseHandler->buildMeta(0, 0, 0);
+            }
+        } else {
+            $responseHandler->setStatusCode(Response::STATUS_CODE_400);
+            $responseHandler->setData($collaboratorLoginValidator->messages);
+            $responseHandler->setError(true);
+            $responseHandler->setMessage("Bad request");
+            $responseHandler->buildMeta(0, 0, 0);
+        }
         return $responseHandler;
     }
 
