@@ -16,7 +16,8 @@ class UserSession
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
-     */private $id;
+     */
+    private $id;
     /**
      * @ORM\Column(type="string")
      */
@@ -84,14 +85,14 @@ class UserSession
      */
     public function getUser()
     {
-        return $this->user_id;
+        return $this->user;
     }
 
     /**
      * @param mixed $user_id
      */
-    public function setUser($user_id): void
+    public function setUser($user): void
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
     }
 }

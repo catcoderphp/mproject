@@ -12,10 +12,9 @@ use Zend\Validator\NotEmpty;
 
 class UserRootValidator
 {
+    public $messages;
     private $email;
     private $passwd;
-    public $messages;
-
     /**
      * @var InputFilter
      */

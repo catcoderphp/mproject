@@ -53,11 +53,11 @@ class RoutesDelegator
             "POST"
         ]);
 
-        $app->route("/user",[
+        $app->route("/user-login", [
             ImplicitOptionsMiddleware::class,
             BodyParamsMiddleware::class,
             UserRootHandler::class
-        ],["GET","POST"]);
+        ], ["POST"]);
 
         return $app;
     }

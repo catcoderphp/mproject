@@ -7,10 +7,10 @@ namespace App\Handler;
 use App\RestDispatchTrait;
 use App\Service\UserRootService;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Hal\HalResponseFactory;
 use Zend\Expressive\Hal\ResourceGenerator;
-use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Class UserRootHandler
@@ -53,15 +53,16 @@ class UserRootHandler implements RequestHandlerInterface
      * @param ServerRequestInterface $request
      * @return JsonResponse
      */
-    public final function post(ServerRequestInterface $request) : JsonResponse
+    public final function post(ServerRequestInterface $request): JsonResponse
     {
         $response = $this->userRootService->login($request);
-        return $this->createResponseByJsonObject($response,[],$response->getStatusCode());
+        return $this->createResponseByJsonObject($response, [], $response->getStatusCode());
     }
 
-    public final function get(ServerRequestInterface $request) : JsonResponse
+    public final function get(ServerRequestInterface $request): JsonResponse
     {
-        var_dump(md5("mariomejia@mail.com"."123456789"));die;
-        return $this->createResponseByJsonObject(["ping" => time()],[],200);
+        var_dump(md5("mariomejia@mail.com" . "123456789"));
+        die;
+        return $this->createResponseByJsonObject(["ping" => time()], [], 200);
     }
 }

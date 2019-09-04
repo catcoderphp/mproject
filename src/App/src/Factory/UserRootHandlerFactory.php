@@ -17,6 +17,6 @@ class UserRootHandlerFactory
         $resourceGenerator = $container->get(ResourceGenerator::class);
         $responseFactory = $container->get(HalResponseFactory::class);
         $userRootService = $container->get(UserRootService::class);
-        return new UserRootHandler($resourceGenerator,$responseFactory,$userRootService);
+        return new UserRootHandler($resourceGenerator, $responseFactory, $userRootService);
     }
 }

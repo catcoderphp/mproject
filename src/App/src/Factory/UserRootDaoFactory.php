@@ -16,6 +16,6 @@ class UserRootDaoFactory
         $em = $container->get(EntityManager::class);
         $emTransactions = $container->get(EMTransactions::class);
 
-        return new UserRootDao($em,$emTransactions);
+        return new UserRootDao($em, $emTransactions);
     }
 }
