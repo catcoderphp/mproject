@@ -42,6 +42,10 @@ class CollaboratorHandler implements RequestHandlerInterface
         $this->membershipDao = $membershipDao;
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @return \Zend\Diactoros\Response\JsonResponse
+     */
     public final function get(ServerRequestInterface $request)
     {
         $params = $request->getQueryParams();

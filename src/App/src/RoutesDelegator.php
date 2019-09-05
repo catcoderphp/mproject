@@ -32,11 +32,11 @@ class RoutesDelegator
         /** @var $app Application */
         $app = $callback();
 
-        $app->route("/provider",
+        $app->route("/api/provider",
             [DataProviderHandler::class], ["GET"]
         );
 
-        $app->route("/clients", [
+        $app->route("/api/clients", [
             ImplicitOptionsMiddleware::class,
             BodyParamsMiddleware::class,
             ClientHandler::class
@@ -45,7 +45,7 @@ class RoutesDelegator
             "POST"
         ]);
 
-        $app->route("/collaborators", [
+        $app->route("/api/collaborators", [
             ImplicitOptionsMiddleware::class,
             BodyParamsMiddleware::class,
             CollaboratorHandler::class
@@ -54,13 +54,13 @@ class RoutesDelegator
             "POST"
         ]);
 
-        $app->route("/user-login", [
+        $app->route("/api/user-login", [
             ImplicitOptionsMiddleware::class,
             BodyParamsMiddleware::class,
             UserRootHandler::class
         ], ["POST"]);
 
-        $app->route("/collaborator-login", [
+        $app->route("/api/collaborator-login", [
             ImplicitOptionsMiddleware::class,
             BodyParamsMiddleware::class,
             CollaboratorLoginHandler::class
