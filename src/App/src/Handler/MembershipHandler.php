@@ -66,6 +66,7 @@ class MembershipHandler implements RequestHandlerInterface
                             if (!is_null($clients)) {
                                 foreach ($clients as $client) {
                                     $membershipResponse["clients"][] = [
+                                        "id" => $client->getId(),
                                         "name" => $client->getName(),
                                         "lastname" => $client->getLastname(),
                                         "email" => $client->getEmail(),
