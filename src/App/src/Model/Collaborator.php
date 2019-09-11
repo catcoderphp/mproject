@@ -5,6 +5,7 @@ namespace App\Model;
 
 
 use App\Entity\CollaboratorEntity;
+use App\Entity\MembershipEntity;
 
 class Collaborator
 {
@@ -123,10 +124,16 @@ class Collaborator
         $memberships = $collaboratorEntity->getMemberships();
         if (!is_null($memberships)) {
             foreach ($memberships as $membership) {
-                $membershipResponse[] = [
-                    "id" => $membership->getId(),
-                    "name" => $membership->getName(),
-                ];
+                if ($membership instanceof MembershipEntity) {
+                    $suscription = $membership->getSuscription();
+                    if ($suscription->getTtl() > time()) {
+                        $membershipResponse[$membership->getId()] = [
+                            "id" => $membership->getId(),
+                            "name" => $membership->getName(),
+                            "active_until" => date("d-M-Y", $suscription->getTtl())
+                        ];
+                    }
+                }
             }
         }
         $this->setMemberships($membershipResponse);

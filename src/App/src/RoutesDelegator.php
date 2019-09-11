@@ -13,6 +13,7 @@ use App\Handler\ClientHandler;
 use App\Handler\CollaboratorHandler;
 use App\Handler\CollaboratorLoginHandler;
 use App\Handler\DataProviderHandler;
+use App\Handler\MembershipHandler;
 use App\Handler\UserRootHandler;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
@@ -65,6 +66,12 @@ class RoutesDelegator
             BodyParamsMiddleware::class,
             CollaboratorLoginHandler::class
         ], ["POST"]);
+
+        $app->route("/api/membership", [
+            ImplicitOptionsMiddleware::class,
+            BodyParamsMiddleware::class,
+            MembershipHandler::class
+        ], ["GET"]);
 
         return $app;
     }

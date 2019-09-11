@@ -37,6 +37,27 @@ class MembershipEntity
     private $active;
 
     /**
+     * @ORM\OneToOne(targetEntity="SuscriptionEntity",mappedBy="membership")
+     */
+    private $suscription;
+
+    /**
+     * @return mixed
+     */
+    public function getSuscription()
+    {
+        return $this->suscription;
+    }
+
+    /**
+     * @param mixed $suscription
+     */
+    public function setSuscription($suscription): void
+    {
+        $this->suscription = $suscription;
+    }
+
+    /**
      * @return mixed
      */
     public function getId()

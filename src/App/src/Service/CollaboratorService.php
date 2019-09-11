@@ -10,6 +10,7 @@ use App\Entity\CollaboratorSessionEntity;
 use App\Entity\MembershipEntity;
 use App\Model\Collaborator;
 use App\Model\ResponseHandler;
+use App\Model\Session;
 use App\Validators\CollaboratorLoginValidator;
 use App\Validators\CollaboratorValidator;
 use Psr\Http\Message\ServerRequestInterface;
@@ -43,6 +44,17 @@ class CollaboratorService
         }
 
         return $this->response;
+    }
+
+    public function getByToken($token)
+    {
+        $session = $this->collaboratorDao->getByToken($token);
+        if ($session instanceof CollaboratorSessionEntity) {
+            $sessionMap = new Session();
+            return $sessionMap->map($session);
+        }
+
+        return null;
     }
 
     public function save(ServerRequestInterface $request): ResponseHandler

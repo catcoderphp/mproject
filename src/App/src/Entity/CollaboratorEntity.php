@@ -43,7 +43,6 @@ class CollaboratorEntity
      * @ORM\Column(type="string")
      */
     private $phone;
-
     /**
      * Many Collaborators have many memberships
      * @ORM\ManyToMany(targetEntity="MembershipEntity")
@@ -58,6 +57,26 @@ class CollaboratorEntity
      * @ORM\OneToOne(targetEntity="CollaboratorSessionEntity",mappedBy="collaborator")
      */
     private $session;
+    /**
+     * @ORM\OneToOne(targetEntity="SuscriptionEntity",mappedBy="collaborator")
+     */
+    private $suscription;
+
+    /**
+     * @return mixed
+     */
+    public function getSuscription()
+    {
+        return $this->suscription;
+    }
+
+    /**
+     * @param mixed $suscription
+     */
+    public function setSuscription($suscription): void
+    {
+        $this->suscription = $suscription;
+    }
 
     /**
      * @return mixed

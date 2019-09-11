@@ -42,6 +42,38 @@ class RangeEntity
     /**
      * @return mixed
      */
+    public function getClients()
+    {
+        return $this->clients;
+    }
+
+    /**
+     * @param mixed $clients
+     */
+    public function setClients($clients): void
+    {
+        $this->clients = $clients;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMembership()
+    {
+        return $this->membership;
+    }
+
+    /**
+     * @param mixed $membership
+     */
+    public function setMembership($membership): void
+    {
+        $this->membership = $membership;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;

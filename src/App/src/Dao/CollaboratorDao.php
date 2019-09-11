@@ -31,6 +31,11 @@ class CollaboratorDao
         return $this->repository->find($id);
     }
 
+    public function getByToken($token)
+    {
+        return $this->collaboratorSessionRepo->findOneBy(["token" => $token]);
+    }
+
     public function haveMembership($membership_id, $collaborator_id)
     {
         $connection = $this->em->getConnection();
@@ -100,4 +105,5 @@ class CollaboratorDao
             return $this->createSession($collaboratorEntity, true);
         }
     }
+
 }

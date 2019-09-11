@@ -29,6 +29,8 @@ class CollaboratorHandler implements RequestHandlerInterface
 
     private $membershipDao;
 
+    private $response;
+
     public function __construct(
         CollaboratorService $collaboratorService,
         HalResponseFactory $responseFactory,
@@ -40,6 +42,7 @@ class CollaboratorHandler implements RequestHandlerInterface
         $this->resourceGenerator = $resourceGenerator;
         $this->responseFactory = $responseFactory;
         $this->membershipDao = $membershipDao;
+        $this->response = new ResponseHandler();
     }
 
     /**
@@ -50,21 +53,36 @@ class CollaboratorHandler implements RequestHandlerInterface
     {
         $params = $request->getQueryParams();
 
-        if ((!isset($params["collaborator_id"])) && (!isset($params["membership_id"]))) {
-            $response = new ResponseHandler();
-            $response->setStatusCode(Response::STATUS_CODE_400);
-            $response->setData([
-                "collaborator_id" => null,
-                "membership_id" => null
-            ]);
-            $response->setMessage("Parameters is missing");
-            $response->setError(true);
-            $response->buildMeta(0, 0, 0);
-            return $this->createResponseByJsonObject($response, [], $response->getStatusCode());
-        } else {
-            $response = $this->collaboratorService->getById($params["collaborator_id"]);
+        $response = new ResponseHandler();
+
+        if (isset($params["token"])) {
+            $this->actions("token", $params["token"]);
         }
-        return $this->createResponseByJsonObject($response, [], $response->getStatusCode());
+        return $this->createResponseByJsonObject($this->response, [], $this->response->getStatusCode());
+    }
+
+    private function actions($action, $param)
+    {
+        $response = $this->response;
+        $actions = [
+            "token" => function () use (&$param, $response) {
+
+                $collaboratorSession = $this->collaboratorService->getByToken($param);
+                if (!is_null($collaboratorSession)) {
+                    $response->setData($collaboratorSession);
+                    $response->setError(false);
+                    $response->setMessage("Session active");
+                    $response->setStatusCode(Response::STATUS_CODE_200);
+                    $response->buildMeta(1, 1, 1);
+                } else {
+                    $response->notFound();
+                }
+            },
+            "membership_by_collaborator" => function () use (&$param, &$response) {
+            }
+        ];
+        $this->response = $response;
+        $actions[$action]();
     }
 
     /**
