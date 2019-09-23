@@ -7,6 +7,7 @@ namespace App;
 use App\Dao\ClientDao;
 use App\Dao\CollaboratorDao;
 use App\Dao\MembershipDao;
+use App\Dao\ProcessesDao;
 use App\Dao\RangeDao;
 use App\Dao\UserRootDao;
 use App\Factory\ClientDaoFactory;
@@ -20,6 +21,9 @@ use App\Factory\DataProviderHandlerFactory;
 use App\Factory\EMTransactionsFactory;
 use App\Factory\MembershipDaoFactory;
 use App\Factory\MembershipHandlerFactory;
+use App\Factory\ProcessesDaoFactory;
+use App\Factory\ProcessesHandlerFactory;
+use App\Factory\ProcessesServiceFactory;
 use App\Factory\RangeDaoFactory;
 use App\Factory\UserRootDaoFactory;
 use App\Factory\UserRootHandlerFactory;
@@ -29,9 +33,11 @@ use App\Handler\CollaboratorHandler;
 use App\Handler\CollaboratorLoginHandler;
 use App\Handler\DataProviderHandler;
 use App\Handler\MembershipHandler;
+use App\Handler\ProcessesHandler;
 use App\Handler\UserRootHandler;
 use App\Service\ClientService;
 use App\Service\CollaboratorService;
+use App\Service\ProcessesService;
 use App\Service\UserRootService;
 use App\Utils\EMTransactions;
 use Zend\Expressive\Application;
@@ -73,10 +79,12 @@ class ConfigProvider
                 MembershipDao::class => MembershipDaoFactory::class,
                 CollaboratorDao::class => CollaboratorDaoFactory::class,
                 UserRootDao::class => UserRootDaoFactory::class,
+                ProcessesDao::class => ProcessesDaoFactory::class,
                 //service invokable
                 ClientService::class => ClientServiceFactory::class,
                 CollaboratorService::class => CollaboratorServiceFactory::class,
                 UserRootService::class => UserRootServiceFactory::class,
+                ProcessesService::class => ProcessesServiceFactory::class,
                 // handler invokable
                 DataProviderHandler::class => DataProviderHandlerFactory::class,
                 ClientHandler::class => ClientHandlerFactory::class,
@@ -84,6 +92,7 @@ class ConfigProvider
                 UserRootHandler::class => UserRootHandlerFactory::class,
                 CollaboratorLoginHandler::class => CollaboratorLoginFactory::class,
                 MembershipHandler::class => MembershipHandlerFactory::class,
+                ProcessesHandler::class => ProcessesHandlerFactory::class,
                 //utils invokable
                 EMTransactions::class => EMTransactionsFactory::class
             ],

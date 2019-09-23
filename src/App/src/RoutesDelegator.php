@@ -14,6 +14,7 @@ use App\Handler\CollaboratorHandler;
 use App\Handler\CollaboratorLoginHandler;
 use App\Handler\DataProviderHandler;
 use App\Handler\MembershipHandler;
+use App\Handler\ProcessesHandler;
 use App\Handler\UserRootHandler;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
@@ -72,6 +73,12 @@ class RoutesDelegator
             BodyParamsMiddleware::class,
             MembershipHandler::class
         ], ["GET"]);
+
+        $app->route("/mproject/api/process",[
+            ImplicitOptionsMiddleware::class,
+            BodyParamsMiddleware::class,
+            ProcessesHandler::class
+        ]);
 
         return $app;
     }
