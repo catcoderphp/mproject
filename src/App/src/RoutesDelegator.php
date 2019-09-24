@@ -78,7 +78,7 @@ class RoutesDelegator
             ImplicitOptionsMiddleware::class,
             BodyParamsMiddleware::class,
             ProcessesHandler::class
-        ]);
+        ],["POST"]);
 
         return $app;
     }

@@ -29,10 +29,15 @@ class ProcessesDao
 
     public function verifyStatus(ProcessesEntity $processesEntity):?ProcessesEntity
     {
+
         $process = $this->repo->findBy([
             "collaborator_id" => $processesEntity->getCollaborator(),
             "client_id" => $processesEntity->getClient(),
         ]);
+        if (empty($process))
+        {
+            $process = null;
+        }
 
         return $process;
     }

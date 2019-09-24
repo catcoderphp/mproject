@@ -21,15 +21,15 @@ class ProcessesEntity
     /**
      * @ORM\Column(type="string")
      */
-    private $collaborator;
+    private $collaborator_id;
     /**
      * @ORM\Column(type="string")
      */
-    private $client;
+    private $client_id;
     /**
      * @ORM\Column(type="string")
      */
-    private $user;
+    private $user_id;
     /**
      * @ORM\Column(type="integer")
      */

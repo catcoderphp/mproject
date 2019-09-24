@@ -19,12 +19,12 @@ class ProcessesService
         $this->processesDao = $processesDao;
     }
 
-    public function createProcess(ProcessesEntity $processesEntity):ProcessesEntity
+    public function createProcess(ProcessesEntity $processesEntity):?ProcessesEntity
     {
         return $this->processesDao->createProcess($processesEntity);
     }
 
-    public function verifyStatus(ProcessesEntity $processesEntity) :ProcessesEntity
+    public function verifyStatus(ProcessesEntity $processesEntity) :?ProcessesEntity
     {
         return $this->processesDao->verifyStatus($processesEntity);
     }
