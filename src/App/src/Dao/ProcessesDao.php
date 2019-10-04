@@ -21,16 +21,16 @@ class ProcessesDao
         $this->emTransactions = $emTransactions;
     }
 
-    public function createProcess(ProcessesEntity $processesEntity)
+    public function createProcess(ProcessesEntity $processesEntity) :ProcessesEntity
     {
-        $process = $this->emTransactions->persist($this->entityManager, $processesEntity);
-        return $process;
+        $this->emTransactions->persist($this->entityManager, $processesEntity);
+        return $processesEntity;
     }
 
     public function verifyStatus(ProcessesEntity $processesEntity):?ProcessesEntity
     {
 
-        $process = $this->repo->findBy([
+        $process = $this->repo->findOneBy([
             "collaborator_id" => $processesEntity->getCollaborator(),
             "client_id" => $processesEntity->getClient(),
         ]);
@@ -38,7 +38,6 @@ class ProcessesDao
         {
             $process = null;
         }
-
         return $process;
     }
 }

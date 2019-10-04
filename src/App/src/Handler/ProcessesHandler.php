@@ -63,11 +63,12 @@ class ProcessesHandler implements RequestHandlerInterface
         }
         $response = new ResponseHandler();
         $process = new Processes();
-        $response->setData($process->map($processesEntity));
+        $map = $process->map($processesEntity);
+        $response->setData($map);
         $response->setError(false);
         $response->setMessage("Message");
         $response->setStatusCode(Response::STATUS_CODE_200);
         $response->buildMeta(0, 0, 0);
-        return $this->createResponseByJsonObject([], $headers, $response->getStatusCode());
+        return $this->createResponseByJsonObject($response, $headers, $response->getStatusCode());
     }
 }

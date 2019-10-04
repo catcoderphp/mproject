@@ -19,15 +19,15 @@ class ProcessesEntity
      */
     private $id;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
     private $collaborator_id;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
     private $client_id;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
     private $user_id;
     /**
@@ -35,11 +35,11 @@ class ProcessesEntity
      */
     private $status_id;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="boolean")
      */
     private $active;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
     private $date;
 
@@ -64,7 +64,7 @@ class ProcessesEntity
      */
     public function getCollaborator()
     {
-        return $this->collaborator;
+        return $this->collaborator_id;
     }
 
     /**
@@ -72,7 +72,7 @@ class ProcessesEntity
      */
     public function setCollaborator($collaborator): void
     {
-        $this->collaborator = $collaborator;
+        $this->collaborator_id = $collaborator;
     }
 
     /**
@@ -80,7 +80,7 @@ class ProcessesEntity
      */
     public function getClient()
     {
-        return $this->client;
+        return $this->client_id;
     }
 
     /**
@@ -88,7 +88,7 @@ class ProcessesEntity
      */
     public function setClient($client): void
     {
-        $this->client = $client;
+        $this->client_id = $client;
     }
 
     /**
@@ -96,7 +96,7 @@ class ProcessesEntity
      */
     public function getUser()
     {
-        return $this->user;
+        return $this->user_id;
     }
 
     /**
@@ -104,7 +104,7 @@ class ProcessesEntity
      */
     public function setUser($user): void
     {
-        $this->user = $user;
+        $this->user_id = $user;
     }
 
     /**

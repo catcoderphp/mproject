@@ -35,6 +35,7 @@ class EMTransactions
             $this->executions[$action]();
             $entityManager->flush();
             $entityManager->getConnection()->commit();
+
         } catch (\Exception $exception) {
             error_log("entra aca");
             $entityManager->getConnection()->rollBack();
